@@ -46,7 +46,7 @@ input:focus {
 
 button {
     padding: 12px 20px;
-    background-color: #3498db;
+    background-color: #0d4b7e;
     color: #fff;
     border: none;
     border-radius: 30px;
@@ -88,7 +88,7 @@ button:active {
 }
 
 .category-btn:hover {
-    background-color: #3498db;
+    background-color: #0d4b7e;
     transform: scale(1.05);
 }
 
@@ -145,4 +145,24 @@ button:active {
 
 .news-card a:hover {
     text-decoration: underline;
+}
+#reset-btn {
+    padding: 12px 20px;
+    background-color: #0d4b7e;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    margin-left: 10px; /* Adds space between buttons */
+}
+
+#reset-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+#reset-btn:active {
+    transform: scale(1);
 }
