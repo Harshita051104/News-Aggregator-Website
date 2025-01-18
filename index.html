@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple News Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Latest News</h1>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search for news..." />
+      <button id="search-btn">Search</button>
+    </div>
+  </header>
+
+  <nav class="category-bar">
+    <button class="category-btn" data-category="India News">India News</button>
+    <button class="category-btn" data-category="Stock market">Stock Market</button>
+    <button class="category-btn" data-category="bollywood">Bollywood</button>
+    <button class="category-btn" data-category="politics">Politics</button>
+    <button class="category-btn" data-category="sports">Sports</button>
+    <button class="category-btn" data-category="weather">Weather</button>
+    <button class="category-btn" data-category="technology">Technology</button>
+  </nav>
+
+  <main>
+    <div id="news-container" class="news-container">
+      <!-- News cards will be inserted here dynamically -->
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
