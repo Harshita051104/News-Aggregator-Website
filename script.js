@@ -62,4 +62,11 @@ categoryButtons.forEach(button => {
     fetchNews(category);
   });
 });
+const resetBtn = document.getElementById('reset-btn');
+
+// Event listener for the reset button
+resetBtn.addEventListener('click', () => {
+  // Reload the page to reset the content
+  window.location.reload();
+});
 
