@@ -74,7 +74,6 @@ resetBtn.addEventListener("click", () => {
 // Load default news on page load
 fetchNews();
 
-});
 
 
 
