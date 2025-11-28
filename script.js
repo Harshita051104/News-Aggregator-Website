@@ -1,40 +1,44 @@
-const apiKey = 'ab8e8451bddd02190ff5172433e112f4'; // Replace with your API key
-const newsContainer = document.getElementById('news-container');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
+const apiKey = "ab8e8451bddd02190ff5172433e112f4"; // Your API key
+const newsContainer = document.getElementById("news-container");
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
+const categoryButtons = document.querySelectorAll(".category-btn");
+const resetBtn = document.getElementById("reset-btn");
 
 // Function to fetch and display news
-async function fetchNews(query = 'technology') {
-  const url = `https://gnews.io/api/v4/search?q=${query}&lang=en&token=${apiKey}`;
+async function fetchNews(query = "technology") {
+  const url = `https://gnews.io/api/v4/search?q=${query}&lang=en&max=10&token=${apiKey}`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data); // Debugging log
 
-    if (data.articles.length === 0) {
-      newsContainer.innerHTML = '<p>No news found. Try a different search term.</p>';
+    // Fix: Safely handle case when articles are missing
+    if (!data.articles || data.articles.length === 0) {
+      newsContainer.innerHTML = `<p>No news found for "${query}". Try another topic.</p>`;
       return;
     }
 
     displayNews(data.articles);
   } catch (error) {
-    newsContainer.innerHTML = '<p>Error fetching news. Please try again later.</p>';
-    console.error('Error fetching news:', error);
+    newsContainer.innerHTML = "<p>Error fetching news. Please try again later.</p>";
+    console.error("Error fetching news:", error);
   }
 }
 
 // Function to render news cards
 function displayNews(articles) {
-  newsContainer.innerHTML = ''; // Clear previous content
+  newsContainer.innerHTML = ""; // Clear previous content
 
-  articles.forEach(article => {
-    const newsCard = document.createElement('div');
-    newsCard.className = 'news-card';
+  articles.forEach((article) => {
+    const newsCard = document.createElement("div");
+    newsCard.className = "news-card";
 
     newsCard.innerHTML = `
-      <img src="${article.image || 'https://via.placeholder.com/300'}" alt="News Image">
+      <img src="${article.image || "https://via.placeholder.com/300"}" alt="News Image">
       <h2>${article.title}</h2>
-      <p>${article.description || 'No description available.'}</p>
+      <p>${article.description || "No description available."}</p>
       <a href="${article.url}" target="_blank">Read More</a>
     `;
 
@@ -42,31 +46,33 @@ function displayNews(articles) {
   });
 }
 
-// Search button event listener
-searchBtn.addEventListener('click', () => {
+// Search news
+searchBtn.addEventListener("click", () => {
   const query = searchInput.value.trim();
   if (query) {
     fetchNews(query);
   } else {
-    alert('Please enter a search term.');
+    alert("Please enter a search term.");
   }
 });
 
-// Fetch default news on page load
-fetchNews();
-const categoryButtons = document.querySelectorAll('.category-btn');
-
-categoryButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const category = button.getAttribute('data-category');
+// Category buttons
+categoryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const category = button.getAttribute("data-category");
     fetchNews(category);
   });
 });
-const resetBtn = document.getElementById('reset-btn');
 
-// Event listener for the reset button
-resetBtn.addEventListener('click', () => {
-  // Reload the page to reset the content
-  window.location.reload();
+// Reset news
+resetBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  fetchNews(); // Load default news again
 });
+
+// Load default news on page load
+fetchNews();
+
+});
+
 
