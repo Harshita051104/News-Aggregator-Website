@@ -29,20 +29,21 @@ async function fetchNews(query = "technology") {
 
 // Function to render news cards
 function displayNews(articles) {
-  newsContainer.innerHTML = ""; // Clear previous content
+  const newsContainer = document.getElementById('news-container');
+  newsContainer.innerHTML = "";
 
-  articles.forEach((article) => {
-    const newsCard = document.createElement("div");
-    newsCard.className = "news-card";
-
-    newsCard.innerHTML = `
-      <img src="${article.image || "https://via.placeholder.com/300"}" alt="News Image">
-      <h2>${article.title}</h2>
-      <p>${article.description || "No description available."}</p>
-      <a href="${article.url}" target="_blank">Read More</a>
+  articles.forEach(article => {
+    const card = `
+      <div class="news-card">
+        <img src="${article.image}" alt="">
+        <div class="news-content">
+          <h2>${article.title}</h2>
+          <p>${article.description}</p>
+          <a href="${article.url}" target="_blank">Read More →</a>
+        </div>
+      </div>
     `;
-
-    newsContainer.appendChild(newsCard);
+    newsContainer.innerHTML += card;
   });
 }
 
@@ -74,5 +75,6 @@ resetBtn.addEventListener("click", () => {
 fetchNews();
 
 });
+
 
 
